@@ -16,12 +16,19 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Classes/**/*.swift'
+  s.source_files = 'Classes/*.swift'
   s.resource_bundles = {
     'RockyHelpers' => ['Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  spec.subspec 'Utils' do |utils|
+    utils = 'Classes/Utils/*.swift'
+  end
+
+  spec.subspec 'Network' do |network|
+    network.source_files = 'Classes/Network/*.swift'
+    network.dependency	'Mantle'
+  end
+
+  spec.default_subspec = 'Utils'
 end
